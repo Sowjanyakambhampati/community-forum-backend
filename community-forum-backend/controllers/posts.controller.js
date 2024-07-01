@@ -52,7 +52,7 @@ class PostsController {
     async getPostsByPostAuthor(req, res) {
         try {
             const postAuthor = req.params.postAuthor;
-            const posts = await Posts.find({ postAuthor });
+            const posts = await Posts.find({ postAuthor: postAuthor });
             if (!posts) {
                 return res.status(404).send("posts not found");
             }

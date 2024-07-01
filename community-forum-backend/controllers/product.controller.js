@@ -81,7 +81,19 @@ class ProductController {
         }
     }
 
-   
+    // Products reserved
+    async getProductsByUserReserved(req, res) {
+        try {
+            const reservedById = req.params.reservedById;
+            const products = await Product.find({ reservedById: reservedById });
+            if (!products) {
+                return res.status(404).send("Reserved Products not found");
+            }
+            res.send(products);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    }
 
     // Get products by city
     async getProductsByCity(req, res) {
